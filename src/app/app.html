@@ -1,20 +1,4 @@
-
-<div class="app-container">
-	<header class="app-header">
-		<h1>เมนูไข่สุดอร่อย</h1>
-		<p>ลองทำเมนูไข่และสนุกกับการทำอาหาร!</p>
-	</header>
-
-	<section class="hero">
-		<img
-			class="hero-image"
-			src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1600&auto=format&fit=crop"
-			alt="ไข่ดาวบนขนมปังสุดน่ากิน"
-		/>
-	</section>
-
-	<section class="content">
-		<router-outlet></router-outlet>
-		<app-egg-menu></app-egg-menu>
-	</section>
+<div class="main-app">
+	<router-outlet></router-outlet>
+	<app-egg-menu></app-egg-menu>
 </div>
