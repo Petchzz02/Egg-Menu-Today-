@@ -1,39 +1,43 @@
 # 🍳 เมนูไข่วันนี้ (Egg Menu Today)
 
-โปรเจค Angular สำหรับแสดงเมนูอาหารจากไข่แบบ Modern UI/UX พร้อม Card Layout และ Modal แบบสวยงาม
+โปรเจค Angular สำหรับแสดงเมนูอาหารจากไข่แบบ Modern UI/UX พร้อม Card Layout และ Bootstrap Modal
 
 ## 📋 รายละเอียดโปรเจค
 
-แอปพลิเคชันเว็บแสดงเมนูอาหารจากไข่ที่ออกแบบด้วย:
-- **Angular 21** - Framework หลัก
-- **Bootstrap 5** - สำหรับ UI Components และ Modal
-- **Standalone Components** - โครงสร้างแบบ Modern Angular
+แอปพลิเคชันเว็บแสดงเมนูอาหารจากไข่พร้อมสูตรอาหาร ออกแบบด้วย:
+- **Angular 21** - Framework หลักแบบ Standalone Components
+- **Bootstrap 5.3.8** - สำหรับ Modal และ UI Components
+- **TypeScript 5.9.2** - Type-safe development
+- **Vitest** - Unit testing framework
 - **Responsive Design** - รองรับทุกขนาดหน้าจอ
 
 ## ✨ Features
 
 - 🎨 **Modern UI/UX Design** - Card-based layout พร้อม gradient สีสันสวยงาม
-- 🖼️ **รูปภาพคุณภาพสูง** - ใช้รูปจาก Unsplash API
-- ⏱️ **Badge System** - แสดงเวลา ระดับความยาก และจำนวนวัตถุดิบ
-- 🎭 **Hover Effects** - Animation เมื่อเอาเมาส์ชี้
-- 📱 **Responsive** - ใช้งานได้ทั้ง Desktop, Tablet, Mobile
-- 🎪 **Modal Recipe Detail** - แสดงสูตรอาหารแบบละเอียด
-- 🎯 **Clean Code** - ใช้ TypeScript และ CSS Variables
+- 🖼️ **รูปภาพคุณภาพสูง** - แสดงรูปเมนูอาหารขนาด 280px
+- ⏱️ **Badge System** - แสดงเวลาทำอาหาร, ระดับความยาก, และจำนวนวัตถุดิบ
+- 🎭 **Hover Effects** - Card animation ยกขึ้น + image overlay เมื่อเอาเมาส์ชี้
+- 📱 **Fully Responsive** - Grid layout ปรับตามหน้าจอ (1-3 columns)
+- 🎪 **Bootstrap Modal** - แสดงสูตรอาหารแบบละเอียดพร้อม ingredients และ steps
+- 🎯 **Clean Code** - TypeScript strict typing + CSS Custom Properties
+- ✨ **Smooth Animations** - Fade in, bounce, และ hover transitions
 
 ## 🛠️ Technology Stack
 
-- **Angular** v21.0.0
-- **TypeScript** v5.7.2
-- **Bootstrap** v5.3.3
+- **Angular** v21.0.0 (Standalone Components)
+- **TypeScript** v5.9.2
+- **Bootstrap** v5.3.8
 - **RxJS** v7.8.0
-- **Vite** - Build tool
+- **Vitest** v4.0.8 (Testing)
+- **Angular CLI** v21.0.2
+- **NPM** v11.6.2
 
 ## 📦 Installation
 
-1. Clone โปรเจค:
+1. Clone repository:
 ```bash
 git clone <repository-url>
-cd 14-12-68
+cd "Egg Menu Today"
 ```
 
 2. ติดตั้ง dependencies:
@@ -49,13 +53,9 @@ npm install
 npm start
 ```
 
-หรือ
+เปิดเบราว์เซอร์ไปที่ `http://localhost:4200/` 
 
-```bash
-ng serve
-```
-
-เปิดเบราว์เซอร์ไปที่ `http://localhost:4200/` แอปจะ auto-reload เมื่อมีการแก้ไขไฟล์
+แอปจะ auto-reload อัตโนมัติเมื่อมีการแก้ไขไฟล์
 
 ## 🏗️ Build
 
@@ -67,117 +67,229 @@ npm run build
 
 ไฟล์ที่ build เสร็จจะอยู่ใน `dist/` directory
 
+## 🧪 Testing
+
+Run unit tests ด้วย Vitest:
+
+```bash
+npm test
+```
+
 ## 📁 โครงสร้างโปรเจค
 
 ```
-src/
-├── app/
-│   ├── app.ts              # Main App Component
-│   ├── app.html            # App Template
-│   ├── app.css             # App Styles
-│   ├── app.config.ts       # App Configuration
-│   ├── app.routes.ts       # Routing Configuration
-│   └── egg-menu/           # Egg Menu Component
-│       ├── egg-menu.ts     # Component Logic
-│       ├── egg-menu.html   # Template (Card Grid + Modal)
-│       └── egg-menu.css    # Styles (Modern UI)
-├── index.html              # HTML Entry Point
-├── main.ts                 # Application Bootstrap
-└── styles.css              # Global Styles
-
-public/                     # Static Assets
+Egg Menu Today/
+├── angular.json              # Angular CLI configuration
+├── package.json              # Dependencies และ scripts
+├── tsconfig.json             # TypeScript configuration
+├── tsconfig.app.json         # App-specific TS config
+├── tsconfig.spec.json        # Test-specific TS config
+├── README.md                 # เอกสารโปรเจค
+│
+├── public/                   # Static assets
+│
+└── src/
+    ├── index.html            # HTML entry point
+    ├── main.ts               # Application bootstrap
+    ├── styles.css            # Global styles
+    │
+    └── app/
+        ├── app.ts            # Root component (AppComponent)
+        ├── app.html          # App template (router-outlet + egg-menu)
+        ├── app.css           # App styles
+        ├── app.config.ts     # Application configuration
+        ├── app.routes.ts     # Routing configuration
+        ├── app.spec.ts       # App unit tests
+        │
+        └── egg-menu/         # Egg Menu Feature Component
+            ├── egg-menu.ts   # Component logic (menus data + selectedMenu)
+            ├── egg-menu.html # Template (card grid + Bootstrap modal)
+            ├── egg-menu.css  # Styles (modern UI + animations)
+            └── egg-menu.spec.ts # Component tests
 ```
 
-## 🎨 Features ของ Egg Menu Component
+## 🎨 Component Structure
 
-### Card Layout
-- Grid responsive (1-3 columns)
-- รูปภาพขนาด 280px สวยงาม
-- Badge แสดง: เวลา, ระดับความยาก, จำนวนวัตถุดิบ
-- Hover effect: ลอยขึ้น + แสดง overlay "ดูสูตร"
+### AppComponent (`app/`)
+- **Root component** ของแอปพลิเคชัน
+- ใช้ `router-outlet` สำหรับ routing
+- Import และแสดง `EggMenuComponent`
+- Standalone component พร้อม CommonModule
 
-### Modal Recipe Detail
-- Header gradient พร้อมไอคอน
-- Meta information (เวลา, ระดับ, จำนวนวัตถุดิบ)
-- วัตถุดิบ (Ingredients List) พร้อม hover effect
-- ขั้นตอน (Steps) แบบเลขลำดับพร้อม gradient badge
-- ปุ่มปิดแบบ gradient
+### EggMenuComponent (`app/egg-menu/`)
+**Standalone component** สำหรับแสดงเมนูอาหารจากไข่
 
-### Animations
-- Fade in effects
-- Bounce animation สำหรับ header icon
-- Hover transitions
-- Smooth scrolling
+#### Properties:
+- `menus[]` - Array ของเมนูอาหาร (2 เมนู)
+  - nameTH, nameEN (ชื่อเมนู)
+  - image (URL รูปภาพ)
+  - level, difficulty (ระดับความยาก)
+  - time (เวลาทำอาหาร)
+  - ingredients[] (วัตถุดิบ)
+  - steps[] (ขั้นตอนการทำ)
+- `selectedMenu` - เมนูที่เลือกสำหรับแสดงใน modal
+
+#### Methods:
+- `openMenu(menu)` - เปิด modal แสดงรายละเอียดสูตร
+
+#### Features:
+1. **Card Grid Layout**
+   - Responsive grid (1-3 columns ตามหน้าจอ)
+   - รูปภาพสูง 280px พร้อม overlay "ดูสูตร 📖"
+   - Badge system: เวลา (⏱️), ระดับ (⭐), จำนวนวัตถุดิบ (🥘)
+   - Hover effects: ยกขึ้น, scale, border color
+
+2. **Bootstrap Modal**
+   - แสดงเมื่อคลิกที่ card
+   - Header gradient พร้อม icon 👨‍🍳
+   - Recipe meta (เวลา, ระดับ, วัตถุดิบ)
+   - Ingredients list พร้อม bullets
+   - Numbered steps พร้อม gradient badges
+
+## 🍳 เมนูอาหารในระบบ
+
+### 1. ไข่ยู้ยี้ (Stir-fried Eggs with Curry)
+- **ระดับ**: ง่าย ⭐
+- **เวลา**: 10 นาที
+- **วัตถุดิบ**: 5 อย่าง (ไข่ไก่, นมข้นจืด, พริกชี้ฟ้า, หอมแดง, น้ำปลา)
+- **ขั้นตอน**: 5 ขั้นตอน
+- **รูปภาพ**: dmpcdn.com/food
+
+### 2. ยำไข่ยางมะตูม (Spicy Soft-boiled Egg Salad)
+- **ระดับ**: ปานกลาง ⭐⭐
+- **เวลา**: 15 นาที
+- **วัตถุดิบ**: 6 อย่าง (ไข่ต้มยางมะตูม, หอมแดงซอย, พริกขี้หนู, น้ำมะนาว, น้ำปลา, ผักชี)
+- **ขั้นตอน**: 5 ขั้นตอน
+- **รูปภาพ**: food.mthai.com
+
+## 🎨 Styling & Animations
+
+### CSS Features:
+- **CSS Custom Properties** (CSS Variables)
+- **Flexbox & Grid** layouts
+- **Gradient backgrounds** (linear-gradient)
+- **Box shadows** with color opacity
+- **Transform animations** (translateY, scale, rotate)
+- **Transition effects** (cubic-bezier timing)
+
+### Key Animations:
+```css
+@keyframes fadeInDown    /* Header slide down */
+@keyframes fadeInUp      /* Cards slide up */
+@keyframes bounce        /* Header icon bounce */
+```
+
+### Hover Effects:
+- Card: `translateY(-12px) scale(1.02)` + shadow
+- Image: `scale(1.15) rotate(2deg)`
+- Border colors: เปลี่ยนตาม difficulty (green/yellow)
+- Overlay: fade in ด้วย "ดูสูตร" button
+
+### Color Palette:
+- **Primary Yellow**: `#fdcb6e` → `#ffeaa7`
+- **Success Green**: `#00b894`
+- **Info Blue**: `#74b9ff` → `#0984e3`
+- **Text Dark**: `#2d3436`
+- **Text Gray**: `#636e72`
 
 ## 🔧 การเพิ่มเมนูใหม่
 
-แก้ไขไฟล์ `src/app/egg-menu/egg-menu.ts`:
+แก้ไขไฟล์ [src/app/egg-menu/egg-menu.ts](src/app/egg-menu/egg-menu.ts):
 
 ```typescript
 menus = [
   {
     nameTH: 'ชื่อเมนูภาษาไทย',
     nameEN: 'English Menu Name',
-    image: 'URL รูปภาพ',
+    image: 'https://example.com/image.jpg',
     level: 'ง่าย' | 'ปานกลาง' | 'ยาก',
     time: 'X นาที',
     difficulty: 'easy' | 'medium' | 'hard',
-    ingredients: ['วัตถุดิบ 1', 'วัตถุดิบ 2'],
-    steps: ['ขั้นตอน 1', 'ขั้นตอน 2']
-  }
+    ingredients: ['วัตถุดิบ 1', 'วัตถุดิบ 2', '...'],
+    steps: ['ขั้นตอน 1', 'ขั้นตอน 2', '...']
+  },
+  // ... เพิ่มเมนูใหม่ที่นี่
 ];
 ```
 
-## 🎯 Scripts ที่มีให้ใช้งาน
+### Difficulty Levels:
+- `easy` → สีเขียว `#00b894` (⭐)
+- `medium` → สีเหลือง `#fdcb6e` (⭐⭐)
+- `hard` → สีส้ม `#e17055` (⭐⭐⭐)
+
+## 🎯 Available NPM Scripts
 
 ```bash
-npm start          # เริ่ม dev server
+npm start          # เริ่ม development server (ng serve)
 npm run build      # Build production
-npm test           # รัน unit tests
+npm test           # รัน unit tests (Vitest)
 npm run watch      # Build และ watch for changes
 ```
 
-## 📱 Responsive Breakpoints
+## 📱 Responsive Design
 
-- **Desktop**: > 768px (3 columns)
-- **Tablet**: 768px (2 columns)
-- **Mobile**: < 768px (1 column)
+### Breakpoints:
+- **Desktop** (> 768px): 3 columns grid
+- **Tablet** (≥ 768px): 2 columns grid  
+- **Mobile** (< 768px): 1 column grid
 
-## 🎨 Color Palette
+### Grid Configuration:
+```css
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 35px;
+}
+```
 
-- **Primary**: #fdcb6e (Yellow)
-- **Secondary**: #e17055 (Orange)
-- **Success**: #00b894 (Green)
-- **Info**: #74b9ff (Blue)
-- **Background**: #ffeaa7 → #ffffff (Gradient)
+## 🔑 Key Technologies Explained
 
-## 👨‍💻 Development
+### Standalone Components
+- ไม่ต้องใช้ NgModule
+- Import dependencies ใน component โดยตรง
+- ทำให้โค้ดเบาและโหลดเร็วขึ้น
 
-เมนูตัวอย่างในโปรเจค:
-1. **ไข่ยู้ยี้** (Stir-fried Eggs with Curry) - ง่าย, 10 นาที
-2. **ยำไข่ยางมะตูม** (Spicy Soft-boiled Egg Salad) - ปานกลาง, 15 นาที
+### Bootstrap Modal Integration
+- ใช้ `data-bs-toggle="modal"` และ `data-bs-target="#menuModal"`
+- Modal แสดงเมื่อคลิก card
+- `selectedMenu` update ผ่าน `(click)="openMenu(menu)"`
+- ปิด modal ด้วย `data-bs-dismiss="modal"`
+
+### TypeScript Features
+- Strong typing สำหรับ menu object
+- `any` type สำหรับ selectedMenu (ควรสร้าง interface)
+- Array methods: `*ngFor` iteration
+
+## 👨‍💻 Development Notes
+
+### Current Implementation:
+✅ 2 เมนูตัวอย่าง (ไข่ยู้ยี้, ยำไข่ยางมะตูม)  
+✅ Responsive card grid layout  
+✅ Bootstrap modal integration  
+✅ Smooth animations & transitions  
+✅ TypeScript strict mode  
+✅ Standalone components architecture  
+
+### Potential Improvements:
+🔄 สร้าง `Menu` interface สำหรับ type safety  
+🔄 แยก menu data ไปเป็น service หรือ JSON file  
+🔄 เพิ่ม filter/search functionality  
+🔄 เพิ่ม favorite/rating system  
+🔄 Connect to backend API สำหรับ dynamic data  
 
 ## 📄 License
 
-โปรเจคนี้สร้างขึ้นเพื่อการศึกษา
+โปรเจคนี้สร้างขึ้นเพื่อการศึกษาและฝึกฝน Angular
 
-## 🙏 Credits
+## 🙏 Credits & Resources
 
-- **รูปภาพ**: [Unsplash](https://unsplash.com)
-- **Icons**: Unicode Emojis
-- **UI Framework**: Bootstrap 5
-- **Framework**: Angular 21
+- **Framework**: [Angular](https://angular.dev/) v21
+- **UI Components**: [Bootstrap](https://getbootstrap.com/) v5.3.8
+- **Icons**: Unicode Emojis (🍳⏱️⭐🥘)
+- **Images**: External URLs (dmpcdn.com, mthai.com)
+- **Testing**: [Vitest](https://vitest.dev/)
 
 ---
 
-Made with ❤️ and 🍳 by Angular Team
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Made with ❤️ and 🍳**  
+เมนูไข่วันนี้ - อร่อยง่ายๆ ได้โปรตีน
