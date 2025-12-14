@@ -1,0 +1,122 @@
+<div class="egg-menu-container">
+  <!-- Header Section -->
+  <div class="menu-header">
+    <div class="header-content">
+      <span class="header-icon">🍳</span>
+      <h1 class="header-title">เมนูไข่วันนี้</h1>
+      <p class="header-subtitle">Egg Menu Today - อร่อยง่ายๆ ได้โปรตีน</p>
+    </div>
+  </div>
+
+  <!-- Menu Grid Cards -->
+  <div class="menu-grid">
+    <div class="menu-card" 
+         *ngFor="let menu of menus"
+         data-bs-toggle="modal" 
+         data-bs-target="#menuModal" 
+         (click)="openMenu(menu)"
+         [class.easy]="menu.difficulty === 'easy'"
+         [class.medium]="menu.difficulty === 'medium'">
+      
+      <div class="card-image-wrapper">
+        <img [src]="menu.image" [alt]="menu.nameEN" class="card-image">
+        <div class="image-overlay">
+          <span class="view-recipe">ดูสูตร 📖</span>
+        </div>
+      </div>
+      
+      <div class="card-content">
+        <div class="card-header-row">
+          <h3 class="card-title">{{ menu.nameTH }}</h3>
+          <span class="time-badge">
+            <span class="time-icon">⏱️</span>
+            {{ menu.time }}
+          </span>
+        </div>
+        
+        <p class="card-subtitle">{{ menu.nameEN }}</p>
+        
+        <div class="card-footer-row">
+          <span class="difficulty-badge" [class]="menu.difficulty">
+            <span class="badge-icon">{{ menu.difficulty === 'easy' ? '⭐' : '⭐⭐' }}</span>
+            {{ menu.level }}
+          </span>
+          <span class="ingredients-count">
+            🥘 {{ menu.ingredients.length }} วัตถุดิบ
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recipe Modal -->
+  <div class="modal fade" id="menuModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content recipe-modal" *ngIf="selectedMenu">
+        
+        <div class="modal-header recipe-header">
+          <div class="header-info">
+            <h5 class="modal-title">
+              <span class="chef-icon">👨‍🍳</span>
+              {{ selectedMenu.nameTH }}
+            </h5>
+            <p class="modal-subtitle">{{ selectedMenu.nameEN }}</p>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body recipe-body">
+          <div class="recipe-meta">
+            <div class="meta-item">
+              <span class="meta-icon">⏱️</span>
+              <span>{{ selectedMenu.time }}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-icon">{{ selectedMenu.difficulty === 'easy' ? '⭐' : '⭐⭐' }}</span>
+              <span>{{ selectedMenu.level }}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-icon">🥘</span>
+              <span>{{ selectedMenu.ingredients.length }} วัตถุดิบ</span>
+            </div>
+          </div>
+
+          <div class="recipe-sections">
+            <div class="ingredients-section">
+              <h6 class="section-title">
+                <span class="title-icon">🛒</span>
+                วัตถุดิบที่ต้องใช้
+              </h6>
+              <ul class="ingredients-list">
+                <li *ngFor="let ing of selectedMenu.ingredients" class="ingredient-item">
+                  <span class="bullet">•</span>
+                  <span>{{ ing }}</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div class="steps-section">
+              <h6 class="section-title">
+                <span class="title-icon">🔥</span>
+                ขั้นตอนการทำ
+              </h6>
+              <div class="steps-list">
+                <div *ngFor="let step of selectedMenu.steps; let i = index" class="step-item">
+                  <div class="step-number">{{ i + 1 }}</div>
+                  <div class="step-content">{{ step }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer recipe-footer">
+          <button type="button" class="btn-close-modal" data-bs-dismiss="modal">
+            <span>ปิดหน้าต่าง</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
